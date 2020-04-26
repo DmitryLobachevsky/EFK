@@ -522,7 +522,7 @@ const Second_Page = {
       this.elements[i] = document.createElement('div');
       this.elements[i].setAttribute('id', this.pages.page[i - 1].word);
       const temp = this.pages.page[i - 1].audioSrc;
-      temp.id = 'aud_' + this.pages.page[i - 1].word; 
+
       this.elements[i].classList.add('English_words');
       const img = document.createElement('img');
       img.src = this.pages.page[i - 1].image;
