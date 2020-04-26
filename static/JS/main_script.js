@@ -1,6 +1,5 @@
 // eslint-disable-next-line no-undef
 const myStorage = window.localStorage;
-
 const Second_Page = {
   elements: [
     {
@@ -117,7 +116,6 @@ const Second_Page = {
             audioSrc: './static/audio/jump.mp3',
           },
         ],
-
     action_b: [
       {
         word: 'open',
@@ -476,8 +474,6 @@ const Second_Page = {
 
   init() {
     this.elements[0] = document.createElement('div');
-
-
     for (let i = 1; i < this.pages.main_page.length + 1; i++) {
       this.elements[i] = document.createElement('div');
       this.elements[i].setAttribute('id', this.pages.main_page[i - 1].word);
@@ -504,6 +500,9 @@ const Second_Page = {
     while (div.firstChild) {
       div.removeChild(div.firstChild);
     }
+    const tab = document.getElementsByClassName('statsTable');
+    while(tab.firstChild)
+      tab.removeChild(tab.firstChild);
 
     if (myStorage.getItem('test_1') == 1) { this.pages.page = this.pages.action_a; } else
     if (myStorage.getItem('test_1') == 2) { this.pages.page = this.pages.action_b; } else
@@ -523,7 +522,7 @@ const Second_Page = {
       this.elements[i] = document.createElement('div');
       this.elements[i].setAttribute('id', this.pages.page[i - 1].word);
       const temp = this.pages.page[i - 1].audioSrc;
-
+      temp.id = 'aud_' + this.pages.page[i - 1].word; 
       this.elements[i].classList.add('English_words');
       const img = document.createElement('img');
       img.src = this.pages.page[i - 1].image;
@@ -532,13 +531,33 @@ const Second_Page = {
       const p = document.createElement('p');
       p.innerHTML = this.pages.page[i - 1].word;
       p.classList.add('second_topic_name');
+      p.id = `p_${this.pages.page[i - 1].word}`;
+      const img2 = document.createElement('img');
+      img2.src = './static/img/rev.jpg';
+      img2.id = `rev_${this.pages.page[i - 1].word}`;
+      img2.classList.add('rev');
+      img2.addEventListener('click', (event) => {
+        this.elements[i].classList.add('rotate');
+        const t = document.createElement('p');
+        t.id = `t_${this.pages.page[i - 1].word}`;
+        t.style.transform = 'rotateY(-180deg)';
+        t.style.zIndex = 0;
+        t.classList.add('second_topic_name_rev');
+        t.innerHTML = this.pages.page[i - 1].translation;
+        this.elements[i].appendChild(t);
+      });
+      this.elements[i].addEventListener('mouseout', () => {
+        this.elements[i].classList.remove('rotate');
+        const k = document.getElementById(`t_${this.pages.page[i - 1].word}`);
+        if (k) { k.remove(); }
+      });
       this.elements[i].appendChild(img);
       this.elements[i].appendChild(p);
+      this.elements[i].appendChild(img2);
       this.elements[0].appendChild(this.elements[i]);
     }
     document.body.appendChild(this.elements[0]);
   },
-
 
   reprint_main() {
     for (let i = 0; i < this.elements.length; i++) {
@@ -569,7 +588,75 @@ const Second_Page = {
     document.body.appendChild(this.elements[0]);
   },
 
+
+  reprintStats() {
+    for (let i = 0; i < this.elements.length; i++) {
+      this.elements[i].remove();
+    }
+    const div = document.getElementsByClassName('topic');
+    while (div.firstChild) {
+      div.removeChild(div.firstChild);
+    }
+    this.elements[0] = document.createElement('div');
+    document.body.style.backgroundColor = '#E0FFFF';
+
+    for(let t = 0; t < 8; t++){
+      if (t == 0) { this.pages.page = this.pages.action_a; } else
+      if (t == 1) { this.pages.page = this.pages.action_b; } else
+      if (t == 2) { this.pages.page = this.pages.action_c; } else
+      if (t == 3) { this.pages.page = this.pages.adjective; } else
+      if (t == 4) { this.pages.page = this.pages.animal_a; } else
+      if (t == 5) { this.pages.page = this.pages.animal_b; } else
+      if (t == 6) { this.pages.page = this.pages.clothes; } else
+      if (t == 7) { this.pages.page = this.pages.emotion; } 
+      const newTable = document.createElement('table');
+      newTable.classList.add('statsTable');
+      for (let i = 0; i < 4; i++) {
+        const newRow = newTable.insertRow(i);
+        for (let j = 0; j < 9; j++) {
+          const newCell = newRow.insertCell(j);
+
+          if(i == 0 && j == 0){
+            newCell.innerHTML = "Word";
+            newCell.style.background = 'rgb(85, 107, 47)';
+            }
+          if(i == 1 && j == 0){
+            newCell.innerHTML = "Translate";
+            newCell.style.background = 'rgb(107, 142, 35)';
+          }
+          if(i == 2 && j == 0){
+            newCell.innerHTML = "True_in_Train";
+            newCell.style.background = 'rgb(154, 205, 50)';
+          }
+          if(i == 3 && j == 0){
+            newCell.innerHTML = "True_in_Game";
+            newCell.style.background = 'rgb(154, 205, 100)';
+          }
+          if(i == 0 && j > 0){
+            newCell.innerHTML = this.pages.page[j - 1].word;
+            newCell.style.background = 'rgb(85, 107, 47)';
+          }
+          if(i == 1 && j > 0){
+            newCell.innerHTML = this.pages.page[j - 1].translation;
+            newCell.style.background = 'rgb(107, 142, 35)';
+          }
+          if(i == 2 && j > 0){
+            newCell.innerHTML = '0';
+            newCell.style.background = 'rgb(154, 205, 50)';
+          }
+          if(i == 3 && j > 0){
+            newCell.innerHTML = '0';
+            newCell.style.background = 'rgb(154, 205, 100)';
+          }
+        }
+      }
+
+      this.elements[0].appendChild(newTable);
+  }
+  document.body.appendChild(this.elements[0]);
+},
 };
+
 
 function burgerMenu() {
   const menu = document.querySelector('.burger-menu');
@@ -585,8 +672,7 @@ function burgerMenu() {
   [].forEach.call(links, (el) => {
     el.addEventListener('click', () => toggleMenu());
   });
-  // overlay.addEventListener("click", () => toggleMenu());
-
+  
 
   function toggleMenu() {
     menu.classList.toggle('burger-menu_active');
@@ -640,7 +726,8 @@ document.addEventListener('mousedown', (event) => {
   if (event.target.id === 'main_page') {
     myStorage.setItem('test_1', 0);
     Second_Page.reprint_main();
-  }
+  } else
+  if (event.target.id === 'statistics') { Second_Page.reprintStats(); }
 });
 
 document.addEventListener('click', (event) => {
@@ -648,3 +735,4 @@ document.addEventListener('click', (event) => {
   audio.src = `/static/audio/${event.target.id}.mp3`;
   audio.autoplay = true;
 });
+

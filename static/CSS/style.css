@@ -63,12 +63,13 @@ body {
 
 .burger-menu__nav {
   position: fixed;
-  margin-top: -8%;
-  padding-top: 5%;
+  margin-top: -10%;
+  padding-top: 10%;
   z-index: 20;
   display: flex;
   flex-flow: column;
   height: 100%;
+  width: 20%;
   background-color: #2a2a2a;
   overflow-y: auto;
   left: -100%;
@@ -81,7 +82,8 @@ body {
 }
 
 .burger-menu__link {
-  padding-left: 5px;
+  padding-left: 20%;
+  margin-top: 1%;
   font-family: sans-serif;
   font-size: 20px;
   text-decoration: none;
@@ -211,6 +213,17 @@ input:checked + .slider:before {
   text-align: center;
 }
 
+.second_topic_name_rev {
+  position: relative;
+  margin-top: -41%;
+  margin-left: 0;
+  font-family: sans-serif;
+  font-size: 22px;
+  font-weight: bold;
+  background-color: #ccc;
+  text-align: center;
+}
+
 .second_main_topic {
   position: relative;
   /*top: 20px;
@@ -235,4 +248,35 @@ input:checked + .slider:before {
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
   transition: 0.5s;
   cursor: pointer;
+}
+
+.rev {
+  position: relative;
+  top: -76px;
+  left: 198px;
+}
+
+.rotate {
+  transform: rotateY(180deg);
+  transition: 0.5s;
+}
+/*Table*/
+table {
+  border-collapse: collapse;
+  border-radius: 20px;
+  
+}
+td {
+  border: 1px solid black;
+  padding: 3px;
+  font-family: sans-serif;
+  text-align: center;
+  width: 5%;
+  height: 30px;
+  overflow: auto;
+}
+
+.statsTable {
+  position: relative;
+  margin-bottom: 5%;
 }
