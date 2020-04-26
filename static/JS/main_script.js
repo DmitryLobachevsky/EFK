@@ -93,7 +93,7 @@ const Second_Page = {
           },
           {
             word: 'fish',
-            translation: 'ловить рыбу',
+            translation: 'рыбачить',
             image: './static/img/Action_A/fish.png',
             audioSrc: './static/audio/fish.mp3',
           },
@@ -522,7 +522,6 @@ const Second_Page = {
       this.elements[i] = document.createElement('div');
       this.elements[i].setAttribute('id', this.pages.page[i - 1].word);
       const temp = this.pages.page[i - 1].audioSrc;
-
       this.elements[i].classList.add('English_words');
       const img = document.createElement('img');
       img.src = this.pages.page[i - 1].image;
@@ -542,7 +541,7 @@ const Second_Page = {
         t.id = `t_${this.pages.page[i - 1].word}`;
         t.style.transform = 'rotateY(-180deg)';
         t.style.zIndex = 0;
-        t.classList.add('second_topic_name_rev');
+        t.classList.add('second_topic_name_r');
         t.innerHTML = this.pages.page[i - 1].translation;
         this.elements[i].appendChild(t);
       });

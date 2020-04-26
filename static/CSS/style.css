@@ -213,10 +213,11 @@ input:checked + .slider:before {
   text-align: center;
 }
 
-.second_topic_name_rev {
+.second_topic_name_r {
   position: relative;
-  margin-top: -41%;
-  margin-left: 0;
+  top: -52%;
+  left: 30%;
+  width: 100px;
   font-family: sans-serif;
   font-size: 22px;
   font-weight: bold;
